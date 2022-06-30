@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('code')->unique();
             $table->string('email')->unique();
             $table->string('profile_photo_path')->nullable();
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('role_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
