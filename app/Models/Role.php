@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Laratrust\Models\LaratrustRole;
 use App\Models\User;
+use App\Models\Permission;
 
 class Role extends LaratrustRole
 {
@@ -20,5 +21,10 @@ class Role extends LaratrustRole
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class);
     }
 }
