@@ -28,6 +28,7 @@ class RoleController extends Controller
                 'display_name' => $role->display_name,
                 'description' => $role->description,
                 'users' => $role->users,
+                'permissions' => $role->permissions,
             ];
         }
 
