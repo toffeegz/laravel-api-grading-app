@@ -23,7 +23,7 @@ class ProfileController extends Controller
             'code' => $user->code,
             'profile_photo_path' => $user->profile_photo_path,
             'email' => $user->email,
-            'role' => $user->role,
+            // 'role' => $user->role,
         ]);
     }
 }

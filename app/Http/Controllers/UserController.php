@@ -34,7 +34,7 @@ class UserController extends Controller
                 'code' => $user->code,
                 'profile_photo_path' => $user->profile_photo_path,
                 'email' => $user->email,
-                'role' => $user->role,
+                // 'role' => $user->role,
                 
             ];
         }
@@ -65,12 +65,12 @@ class UserController extends Controller
             'first_name' => $userRequest->first_name,
             'middle_name' => $userRequest->middle_name,
             'code' => $userRequest->code,
-            'role_id' => $userRequest->role_id,
+            // 'role_id' => $userRequest->role_id,
             'profile_photo_path' => $userRequest->profile_photo_path,
             'email' => $userRequest->email,
             'password' =>  Hash::make($userRequest->password),
         ]);
-        $data->role = $data->role;
+        // $data->role = $data->role;
         return response()->json(['message' => 'User has been added successfully', 'data' => $data]);
     }
 
@@ -113,19 +113,25 @@ class UserController extends Controller
             'code' => 'nullable|string|max:255|unique:users,code,'.$id,
             'email' => 'nullable|string|email|max:255|unique:users,email,'.$id,
             'password' => 'nullable|string|min:8|confirmed',
-            'role_id' => 'nullable|numeric'
+            // 'role_id' => 'nullable|numeric'
         ]);
 
         $data = User::find($id);
-        $data->fill($request->except(['password']));
-        if($request->has('password'))
+        if($data)
         {
-            $data->password = Hash::make($request->password);
+            $data->fill($request->except(['password']));
+            if($request->has('password'))
+            {
+                $data->password = Hash::make($request->password);
+            }
+            $data->save();
+            // $data->role = $data->role;
+            return response()->json(['message' => 'User has been updated successfully', 'data' => $data]);
         }
-        $data->save();
-        $data->role = $data->role;
+        
+        return response()->json(['message' => 'No User found with ID:' . $id]);
 
-        return response()->json(['message' => 'User has been updated successfully', 'data' => $data]);
+        
     }
 
     /**

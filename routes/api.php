@@ -16,5 +16,5 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('profile', ProfileController::class);
 });
 
-Route::resource('/roles', RoleController::class);
+// Route::resource('/roles', RoleController::class);
 Route::resource('/users', UserController::class);
