@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 
-// use App\Models\Role;
+use App\Models\Role;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -22,13 +22,15 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
+    protected $guarded = [];
+
     protected $fillable = [
         'last_name',
         'first_name',
         'middle_name',
         'code',
         'profile_photo_path',
-        // 'role_id',
+        'role_id',
         'email',
         'password',
     ];
@@ -67,9 +69,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    // public function role()
-    // {
-    //     return $this->belongsTo(Role::class, 'role_id');
-    // }
-
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }
