@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
 
 use App\Models\Role;
+use App\Models\Student;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -72,5 +73,10 @@ class User extends Authenticatable implements JWTSubject
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
     }
 }
