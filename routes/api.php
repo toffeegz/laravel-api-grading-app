@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StudentController;
 
 
 Route::group(['prefix' => 'auth'], function () {
@@ -22,3 +23,5 @@ Route::resource('/users', UserController::class);
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
 
 });
+
+Route::resource('/students', StudentController::class);
